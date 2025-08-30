@@ -1,1 +1,579 @@
-<h1>Why did my scanner end up on your site?</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Scanning Information</title>
+    <style>
+        :root {
+            --neon-blue: #00f3ff;
+            --neon-purple: #bd00ff;
+            --neon-pink: #ff00a0;
+            --neon-green: #39ff14;
+            --neon-yellow: #ffed00;
+            --neon-orange: #ff5e00;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+            --card-bg: rgba(15, 15, 35, 0.9);
+            --text: #e0e0ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: var(--dark-bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 0;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(189, 0, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 60%, rgba(0, 243, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 50% 80%, rgba(255, 0, 160, 0.1) 0%, transparent 20%);
+        }
+
+        .cyber-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .cyber-header {
+            background: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid var(--neon-yellow);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 237, 0, 0.3);
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .header-icon {
+            font-size: 60px;
+            color: var(--neon-yellow);
+            text-shadow: 0 0 10px var(--neon-yellow);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { text-shadow: 0 0 10px var(--neon-yellow); }
+            to { text-shadow: 0 0 20px var(--neon-yellow), 0 0 30px var(--neon-yellow); }
+        }
+
+        .header-text h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(45deg, var(--neon-orange), var(--neon-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .header-text p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .cyber-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .cyber-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 94, 0, 0.3);
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 0 15px rgba(255, 94, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--neon-orange), var(--neon-yellow), var(--neon-green));
+            background-size: 100% 300%;
+            animation: gradientFlow 3s ease infinite alternate;
+        }
+
+        @keyframes gradientFlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 0% 50%; }
+            100% { background-position: 0% 100%; }
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(255, 94, 0, 0.2);
+            border-color: var(--neon-orange);
+        }
+
+        .cyber-card:hover::before {
+            animation: gradientFlow 1.5s ease infinite alternate;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+        }
+
+        .card-icon {
+            font-size: 28px;
+            color: var(--neon-yellow);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 237, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            color: var(--neon-orange);
+            text-shadow: 0 0 5px rgba(255, 94, 0, 0.5);
+        }
+
+        .cyber-card p {
+            margin-bottom: 15px;
+            font-size: 1.05rem;
+        }
+
+        .cyber-list {
+            list-style: none;
+            margin: 20px 0;
+        }
+
+        .cyber-list li {
+            margin-bottom: 12px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .cyber-list li::before {
+            content: '▶';
+            color: var(--neon-yellow);
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        .highlight {
+            background: linear-gradient(90deg, rgba(255, 94, 0, 0.2), rgba(255, 237, 0, 0.2));
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-weight: 500;
+            color: #fff;
+            border: 1px solid rgba(255, 94, 0, 0.3);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: var(--neon-yellow);
+            border: 1px solid rgba(255, 237, 0, 0.3);
+        }
+
+        .cyber-footer {
+            background: var(--darker-bg);
+            padding: 30px;
+            border: 1px solid var(--neon-orange);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.3);
+            text-align: center;
+        }
+
+        .cyber-footer p {
+            margin-bottom: 10px;
+        }
+
+        .contact-link {
+            color: var(--neon-orange);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .contact-link:hover {
+            text-shadow: 0 0 10px var(--neon-orange);
+            color: #fff;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--neon-orange);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            color: var(--neon-orange);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .terminal-content {
+            color: var(--neon-yellow);
+        }
+
+        .terminal-line {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .terminal-prompt {
+            color: var(--neon-yellow);
+            margin-right: 10px;
+        }
+
+        .glowing-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--neon-orange);
+            border: 2px solid var(--neon-orange);
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+            margin-top: 20px;
+            text-decoration: none;
+            box-shadow: 0 0 10px rgba(255, 94, 0, 0.5);
+        }
+
+        .glowing-btn:hover {
+            background: rgba(255, 94, 0, 0.1);
+            box-shadow: 0 0 20px rgba(255, 94, 0, 0.7);
+        }
+
+        @media (max-width: 768px) {
+            .cyber-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .header-text h1 {
+                font-size: 2rem;
+            }
+        }
+
+        .cyber-signal {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--neon-orange);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 20px;
+            box-shadow: 0 0 20px var(--neon-orange);
+            animation: signal-pulse 1.5s infinite;
+            z-index: 100;
+            cursor: pointer;
+        }
+
+        @keyframes signal-pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 94, 0, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(255, 94, 0, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 94, 0, 0); }
+        }
+
+        .hacking-animation {
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-orange), var(--neon-yellow), var(--neon-green));
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 5px;
+            background-size: 200% 100%;
+            animation: hacking 2s linear infinite;
+        }
+
+        @keyframes hacking {
+            0% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .network-diagram {
+            width: 100%;
+            height: 200px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--neon-orange);
+            border-radius: 8px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .node {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: var(--neon-yellow);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon-yellow);
+        }
+
+        .connection {
+            position: absolute;
+            background: rgba(255, 94, 0, 0.3);
+            transform-origin: 0 0;
+        }
+
+        .scan-pulse {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-container">
+        <header class="cyber-header">
+            <div class="header-content">
+                <div class="header-icon">🛡️</div>
+                <div class="header-text">
+                    <h1>STOP MALWARE SERVICE</h1>
+                    <p>Our bot is performing security checks on your network infrastructure</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="cyber-grid">
+            <div class="cyber-card">
+                <div class="card-header">
+                    <div class="card-icon">📋</div>
+                    <h2 class="card-title">Our Mission</h2>
+                </div>
+                <p>Our system has detected scanning activity on your network. We provide cybersecurity across the internet by identifying and neutralizing threats.</p>
+                <p>Our bot performs <span class="highlight">search for malicious files and botnets</span> across websites and subnets. We do not use scanning for attacks, hacking, or data theft.</p>
+                <div class="hacking-animation"></div>
+                <div class="terminal">
+                    <div class="terminal-header">
+                        <span>security_scan.log</span>
+                    </div>
+                    <div class="terminal-content">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">>></span>
+                            <span>Initializing scan...</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">>></span>
+                            <span>Threat assessment: <span style="color:var(--neon-orange)">In progress</span></span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">>></span>
+                            <span>Objective: Enhance overall security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-header">
+                    <div class="card-icon">⚙️</div>
+                    <h2 class="card-title">How Scanning Works</h2>
+                </div>
+                <p>Our bot checks networks and subnets for various cyber threats:</p>
+                <ul class="cyber-list">
+                    <li>Malicious scripts and files</li>
+                    <li>Botnet-related elements</li>
+                    <li>Links to infected resources</li>
+                    <li>Security vulnerabilities</li>
+                    <li>Suspicious activities</li>
+                </ul>
+                <div class="hacking-animation"></div>
+                <p>Scanning is performed using modern threat analysis algorithms that are constantly updated to detect new types of attacks.</p>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-header">
+                    <div class="card-icon">🤖</div>
+                    <h2 class="card-title">Subnet-Based Scanning</h2>
+                </div>
+                <p>Our security operations <strong>perform scanning at the subnet level</strong> rather than targeting individual websites.</p>
+                <p>This approach allows us to identify threat patterns and malicious infrastructure across entire network blocks, providing more comprehensive protection.</p>
+                <div class="network-diagram" id="networkDiagram"></div>
+                <p>We scan all accessible resources within subnets to ensure no threats are overlooked due to artificial boundaries.</p>
+            </div>
+
+            <div class="cyber-card">
+                <div class="card-header">
+                    <div class="card-icon">🎯</div>
+                    <h2 class="card-title">Purpose & Benefits</h2>
+                </div>
+                <p>Our mission is to enhance overall security, identify malicious software, and help prevent the spread of botnets.</p>
+                <div class="hacking-animation"></div>
+                <p>Thanks to our work:</p>
+                <ul class="cyber-list">
+                    <li>Network administrators receive information about potential threats</li>
+                    <li>Providers can respond faster to security incidents</li>
+                    <li>The internet community becomes more protected</li>
+                    <li>The risk of user device infection is reduced</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="cyber-footer">
+            <p>© 2023 Cybersecurity Threat Detection | Network Security Bot</p>
+            <p>For cooperation inquiries: <a href="mailto:security@example.com" class="contact-link">security@example.com</a></p>
+            <a href="#" class="glowing-btn">Contact Us</a>
+        </div>
+    </div>
+
+    <div class="cyber-signal">
+        <div class="scan-pulse" id="scanPulse"></div>
+        ⚡
+    </div>
+
+    <script>
+        // Create network diagram
+        function createNetworkDiagram() {
+            const diagram = document.getElementById('networkDiagram');
+            const nodes = [];
+            const connections = [];
+
+            // Create nodes
+            for (let i = 0; i < 15; i++) {
+                const node = document.createElement('div');
+                node.className = 'node';
+                node.style.left = `${10 + Math.random() * 80}%`;
+                node.style.top = `${10 + Math.random() * 80}%`;
+                diagram.appendChild(node);
+                nodes.push(node);
+            }
+
+            // Create connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    if (Math.random() > 0.7) {
+                        const x1 = parseFloat(nodes[i].style.left) + 6;
+                        const y1 = parseFloat(nodes[i].style.top) + 6;
+                        const x2 = parseFloat(nodes[j].style.left) + 6;
+                        const y2 = parseFloat(nodes[j].style.top) + 6;
+
+                        const length = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+                        const angle = Math.atan2(y2 - y1, x2 - x1) * 180 / Math.PI;
+
+                        const connection = document.createElement('div');
+                        connection.className = 'connection';
+                        connection.style.width = `${length}%`;
+                        connection.style.height = '1px';
+                        connection.style.left = `${x1}%`;
+                        connection.style.top = `${y1}%`;
+                        connection.style.transform = `rotate(${angle}deg)`;
+                        diagram.appendChild(connection);
+                        connections.push(connection);
+                    }
+                }
+            }
+
+            // Create scanning pulse
+            const pulse = document.getElementById('scanPulse');
+            let currentTarget = 0;
+
+            function movePulse() {
+                if (nodes.length > 0) {
+                    const targetNode = nodes[currentTarget % nodes.length];
+                    const x = parseFloat(targetNode.style.left) + 6;
+                    const y = parseFloat(targetNode.style.top) + 6;
+
+                    pulse.style.left = `calc(${x}% - 10px)`;
+                    pulse.style.top = `calc(${y}% - 10px)`;
+                    pulse.style.opacity = '1';
+
+                    setTimeout(() => {
+                        pulse.style.opacity = '0';
+                    }, 800);
+
+                    currentTarget++;
+                    setTimeout(movePulse, 1200);
+                }
+            }
+
+            movePulse();
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createNetworkDiagram();
+
+            // Animate terminal lines
+            const terminalLines = document.querySelectorAll('.terminal-line');
+            terminalLines.forEach((line, index) => {
+                line.style.opacity = '0';
+                setTimeout(() => {
+                    line.style.transition = 'opacity 0.5s ease';
+                    line.style.opacity = '1';
+                }, 300 * (index + 1));
+            });
+
+            // Animate button
+            const glowingBtn = document.querySelector('.glowing-btn');
+            setInterval(() => {
+                glowingBtn.style.boxShadow = glowingBtn.style.boxShadow.includes('20px')
+                    ? '0 0 10px rgba(255, 94, 0, 0.5)'
+                    : '0 0 20px rgba(255, 94, 0, 0.7)';
+            }, 1500);
+
+            // Interactive signal
+            const cyberSignal = document.querySelector('.cyber-signal');
+            cyberSignal.addEventListener('click', function() {
+                this.innerHTML = '🛡️';
+                this.style.background = 'var(--neon-orange)';
+                this.style.boxShadow = '0 0 30px var(--neon-orange)';
+                setTimeout(() => {
+                    this.innerHTML = '⚡';
+                    this.style.background = 'var(--neon-orange)';
+                    this.style.boxShadow = '0 0 20px var(--neon-orange)';
+                }, 3000);
+            });
+        });
+    </script>
+</body>
+</html>
